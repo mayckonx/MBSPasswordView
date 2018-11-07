@@ -14,10 +14,10 @@ iOS 11.0+
 
 
 ## Success Case
--![Success](http://i.imgur.com/success.gif)
+<img src="success.gif" width="300">
 
 ## Invalid Case
--![Success](http://i.imgur.com/invalid.gif)
+<img src="invalid.gif" width="300">
 
 ## Installation
 
@@ -32,7 +32,7 @@ github "mayckonx/MBSPasswordView"
 ## How to Use
 1. Import the framework
 ```
-import MBSPassword
+import MBSPasswordView
 ```
 
 2. Create an outlet and link it to your view as a MBSPasswordView.
@@ -70,3 +70,4 @@ You can customize the view. In the sample you can see how access the properties 
 ## Suggestions or feedback?
 
 Feel free to create a pull request, open an issue or find [me on Twitter](https://twitter.com/mayckonx).
+
