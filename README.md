@@ -21,6 +21,11 @@ iOS 11.0+
 
 ## Installation
 
+### CocoaPods
+```
+pod 'MBSPasswordView'
+```
+
 ### Carthage
 
 MBSPasswordView is available through [Carthage](https://github.com/Carthage/Carthage). To install
