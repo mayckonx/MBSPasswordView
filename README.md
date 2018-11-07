@@ -60,7 +60,7 @@ extension ViewController: MBSPasswordDelegate {
 
 That's it. It's done brah! 
 
-You can customize the view. In the sample you can see how access the properties and change it to your preferences. 
+You can customize the view. In the sample you can see how to access the properties and change it to your preferences. 
 
 ## Next improvments
 1. Support 6 digits
@@ -70,4 +70,3 @@ You can customize the view. In the sample you can see how access the properties 
 ## Suggestions or feedback?
 
 Feel free to create a pull request, open an issue or find [me on Twitter](https://twitter.com/mayckonx).
-
