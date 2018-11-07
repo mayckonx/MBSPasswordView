@@ -43,13 +43,6 @@
 			remoteGlobalIDString = EF13DF88219294C4005C6CB7;
 			remoteInfo = Example;
 		};
-		EF13DFA9219294F8005C6CB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF13DF4E219293AA005C6CB7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EF13DF56219293AA005C6CB7;
-			remoteInfo = MBSPasswordView;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -269,7 +262,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF13DFAA219294F8005C6CB7 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -428,11 +420,6 @@
 			isa = PBXTargetDependency;
 			target = EF13DF88219294C4005C6CB7 /* Example */;
 			targetProxy = EF13DF9D219294C5005C6CB7 /* PBXContainerItemProxy */;
-		};
-		EF13DFAA219294F8005C6CB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EF13DF56219293AA005C6CB7 /* MBSPasswordView */;
-			targetProxy = EF13DFA9219294F8005C6CB7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
