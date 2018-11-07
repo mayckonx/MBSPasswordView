@@ -24,24 +24,23 @@
 		EF13DF93219294C5005C6CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF92219294C5005C6CB7 /* Assets.xcassets */; };
 		EF13DF96219294C5005C6CB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF94219294C5005C6CB7 /* LaunchScreen.storyboard */; };
 		EF13DFA1219294C5005C6CB7 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13DFA0219294C5005C6CB7 /* ExampleTests.swift */; };
-		EF13DFAB21929502005C6CB7 /* MBSPasswordView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; };
-		EF13DFAC21929502005C6CB7 /* MBSPasswordView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EFF7EEFE21932873003FA9C6 /* MBSPasswordView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EF13DF62219293AA005C6CB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF13DF4E219293AA005C6CB7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EF13DF56219293AA005C6CB7;
-			remoteInfo = MBSPasswordView;
-		};
 		EF13DF9D219294C5005C6CB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF13DF4E219293AA005C6CB7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EF13DF88219294C4005C6CB7;
 			remoteInfo = Example;
+		};
+		EFF7EEFF21932873003FA9C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF13DF4E219293AA005C6CB7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF13DF56219293AA005C6CB7;
+			remoteInfo = MBSPasswordView;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -52,7 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EF13DFAC21929502005C6CB7 /* MBSPasswordView.framework in Embed Frameworks */,
+				EFF7EEFE21932873003FA9C6 /* MBSPasswordView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF13DFAB21929502005C6CB7 /* MBSPasswordView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +241,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF13DF63219293AA005C6CB7 /* PBXTargetDependency */,
 			);
 			name = MBSPasswordViewTests;
 			productName = MBSPasswordViewTests;
@@ -262,6 +259,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EFF7EF0021932873003FA9C6 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -411,15 +409,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EF13DF63219293AA005C6CB7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EF13DF56219293AA005C6CB7 /* MBSPasswordView */;
-			targetProxy = EF13DF62219293AA005C6CB7 /* PBXContainerItemProxy */;
-		};
 		EF13DF9E219294C5005C6CB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EF13DF88219294C4005C6CB7 /* Example */;
 			targetProxy = EF13DF9D219294C5005C6CB7 /* PBXContainerItemProxy */;
+		};
+		EFF7EF0021932873003FA9C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF13DF56219293AA005C6CB7 /* MBSPasswordView */;
+			targetProxy = EFF7EEFF21932873003FA9C6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
