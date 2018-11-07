@@ -14,10 +14,10 @@ iOS 11.0+
 
 
 ## Success Case
-![](success.gif)
+-![Success](http://i.imgur.com/success.gif)
 
 ## Invalid Case
-![](invalid.gif)
+-![Success](http://i.imgur.com/invalid.gif)
 
 ## Installation
 
