@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.license               = { type: 'MIT', file: 'LICENSE' }
   s.author                = 'Mayckon Barbosa da Silva'
   s.source                = { git: "#{s.homepage}.git", tag: "v#{s.version}" }
-  s.source_files          = "MBSPasswordView/*"
+  s.source_files          = "MBSPasswordView/**/*"
   s.exclude_files          = "MBSPasswordView/*.plist"
   s.ios.deployment_target = '11.0'
   s.swift_version          = '4.2'
