@@ -1,4 +1,5 @@
 ci_service: travis_ci
 coverage_service: coveralls
 xcodeproj: MBSPasswordView.xcodeproj
+scheme: MBSPasswordView
 source_directory: MBSPasswordView/Classes
