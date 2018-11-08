@@ -1,4 +1,4 @@
 language: objective-c
 xcode_project: MBSPasswordView.xcodeproj
-xcode_scheme: MBSPasswordViewTests
+xcode_scheme: MBSPasswordView
 xcode_destination: platform=iOS Simulator,OS=11.2,name=iPhone X
