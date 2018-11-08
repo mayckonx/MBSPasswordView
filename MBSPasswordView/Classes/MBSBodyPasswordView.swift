@@ -54,7 +54,6 @@ public class MBSBodyPasswordView: UIView, MBSBodyPasswordViewType {
         }
     }
     
-    
 }
 
 // MARK: IBActions
@@ -77,5 +76,3 @@ extension MBSBodyPasswordView {
         generator.impactOccurred()
     }
 }
-
-// MARK: 

@@ -60,11 +60,11 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
     weak var delegate: MBSTopPasswordDelegate!
     
     // Property size variables
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
