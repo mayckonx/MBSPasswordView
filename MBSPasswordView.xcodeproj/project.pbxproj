@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		924D2B052226E77B00772B01 /* Authenticatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924D2B042226E77B00772B01 /* Authenticatable.swift */; };
+		924D2B082226E7A300772B01 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924D2B072226E7A300772B01 /* LocalAuthentication.framework */; };
+		925027FA2228271D00A1017D /* UserDefaults+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925027F92228271D00A1017D /* UserDefaults+ext.swift */; };
 		EF13DF61219293AA005C6CB7 /* MBSPasswordView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; };
 		EF13DF68219293AA005C6CB7 /* MBSPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF13DF5A219293AA005C6CB7 /* MBSPasswordView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF13DF79219293DD005C6CB7 /* MBSTopPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13DF72219293DD005C6CB7 /* MBSTopPasswordView.swift */; };
@@ -59,6 +62,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		924D2B042226E77B00772B01 /* Authenticatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticatable.swift; sourceTree = "<group>"; };
+		924D2B072226E7A300772B01 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		925027F92228271D00A1017D /* UserDefaults+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ext.swift"; sourceTree = "<group>"; };
 		EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBSPasswordView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF13DF5A219293AA005C6CB7 /* MBSPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBSPasswordView.h; sourceTree = "<group>"; };
 		EF13DF5B219293AA005C6CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924D2B082226E7A300772B01 /* LocalAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +126,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		924D2AFE2226E61400772B01 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF76219293DD005C6CB7 /* MBSPasswordView.xib */,
+				EF13DF78219293DD005C6CB7 /* MBSPasswordView.swift */,
+				924D2B012226E64800772B01 /* Body */,
+				924D2B002226E63B00772B01 /* Button */,
+				924D2AFF2226E63100772B01 /* Top */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		924D2AFF2226E63100772B01 /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF72219293DD005C6CB7 /* MBSTopPasswordView.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		924D2B002226E63B00772B01 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF74219293DD005C6CB7 /* MBSButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		924D2B012226E64800772B01 /* Body */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF77219293DD005C6CB7 /* MBSBodyPasswordView.swift */,
+			);
+			path = Body;
+			sourceTree = "<group>";
+		};
+		924D2B022226E67800772B01 /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF75219293DD005C6CB7 /* UIColor+ext.swift */,
+				EF13DF73219293DD005C6CB7 /* UIView+ext.swift */,
+				925027F92228271D00A1017D /* UserDefaults+ext.swift */,
+			);
+			path = ext;
+			sourceTree = "<group>";
+		};
+		924D2B032226E74F00772B01 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				924D2B042226E77B00772B01 /* Authenticatable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		924D2B062226E7A200772B01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				924D2B072226E7A300772B01 /* LocalAuthentication.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF13DF4D219293AA005C6CB7 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +196,7 @@
 				EF13DF8A219294C4005C6CB7 /* Example */,
 				EF13DF9F219294C5005C6CB7 /* ExampleTests */,
 				EF13DF58219293AA005C6CB7 /* Products */,
+				924D2B062226E7A200772B01 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,13 +235,9 @@
 		EF13DF71219293AE005C6CB7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EF13DF74219293DD005C6CB7 /* MBSButton.swift */,
-				EF13DF72219293DD005C6CB7 /* MBSTopPasswordView.swift */,
-				EF13DF77219293DD005C6CB7 /* MBSBodyPasswordView.swift */,
-				EF13DF78219293DD005C6CB7 /* MBSPasswordView.swift */,
-				EF13DF76219293DD005C6CB7 /* MBSPasswordView.xib */,
-				EF13DF75219293DD005C6CB7 /* UIColor+ext.swift */,
-				EF13DF73219293DD005C6CB7 /* UIView+ext.swift */,
+				924D2B032226E74F00772B01 /* Protocols */,
+				924D2B022226E67800772B01 /* ext */,
+				924D2AFE2226E61400772B01 /* UI */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -371,12 +437,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924D2B052226E77B00772B01 /* Authenticatable.swift in Sources */,
 				EF13DF7B219293DD005C6CB7 /* MBSButton.swift in Sources */,
 				EF13DF7E219293DD005C6CB7 /* MBSBodyPasswordView.swift in Sources */,
 				EF13DF7C219293DD005C6CB7 /* UIColor+ext.swift in Sources */,
 				EF13DF7A219293DD005C6CB7 /* UIView+ext.swift in Sources */,
 				EF13DF7F219293DD005C6CB7 /* MBSPasswordView.swift in Sources */,
 				EF13DF79219293DD005C6CB7 /* MBSTopPasswordView.swift in Sources */,
+				925027FA2228271D00A1017D /* UserDefaults+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
