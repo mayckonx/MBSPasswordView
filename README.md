@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/mayckonx/MBSPasswordView.svg?branch=master)](https://travis-ci.org/mayckonx/MBSPasswordView) [![Coverage Status](https://coveralls.io/repos/github/mayckonx/MBSPasswordView/badge.svg?branch=master)](https://coveralls.io/github/mayckonx/MBSPasswordView?branch=master) [![Platform](https://img.shields.io/cocoapods/p/MBSPasswordView.svg?style=flat)](http://cocoapods.org/pods/MBSPasswordView)
+[![Build Status](https://travis-ci.org/mayckonx/MBSPasswordView.svg?branch=master)](https://travis-ci.org/mayckonx/MBSPasswordView) [![Coverage Status](https://coveralls.io/repos/github/mayckonx/MBSPasswordView/badge.svg?branch=master)](https://coveralls.io/github/mayckonx/MBSPasswordView?branch=master) [![Platform](https://img.shields.io/cocoapods/p/MBSPasswordView.svg?style=flat)](http://cocoapods.org/pods/MBSPasswordView) [![Downloads](https://img.shields.io/cocoapods/dt/MBSPasswordView.svg)](http://cocoapods.org/pods/MBSPasswordView)
 
 **MBSPasswordView** is a custom view that provides an easy way to use a block-screen password.
 
@@ -39,45 +39,45 @@ github "mayckonx/MBSPasswordView"
 
 ## How to Use
 1. Import the framework
-```
+```swift
 import MBSPasswordView
 ```
 
 2. Go to your Storyboard/XIB -> Identity Inspector and change your class and module to:
-```
+```swift
 MBSPasswordView
 ```
 
 3. Create an outlet and link it to your view as a MBSPasswordView.
-```
+```swift
 @IBOutlet weak var passwordView: MBSPasswordView!
 ```
 
 4. Implement the protocol to get the password result.
-```
+```swift
 extension ViewController: MBSPasswordDelegate {
-func password(_ result: [String]) {
-print("Password:\(result)")
-}
-func passwordFromBiometrics(_ result: Result<[String]>) {
-print("Result:\(result)")
-}
+     func password(_ result: [String]) {
+        print("Password:\(result)")
+    }
+    func passwordFromBiometrics(_ result: Result<[String]>) {
+        print("Result:\(result)")
+    }
 }
 ```
 
 5. Set the delegate in your viewDidLoad
-```
-override func viewDidLoad() {
-super.viewDidLoad()
-
-passwordView?.delegate = self
-passwordView?.titleToRequestAuthentication = "Please, identify your self!"
-passwordView?.start(enableBiometrics: true)
-}
+```swift
+  override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       passwordView?.delegate = self
+       passwordView?.titleToRequestAuthentication = "Please, identify your self!"
+       passwordView?.start(enableBiometrics: true)
+    }
 ```
 
 If you want, you can also check if the device supports FaceID/TouchID using:
-``` 
+```swift
 passwordView?.isTouchIDAvailable()
 passwordView?.isFaceIDAvailable()
 ```
