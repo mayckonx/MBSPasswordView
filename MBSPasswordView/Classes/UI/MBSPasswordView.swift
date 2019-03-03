@@ -31,9 +31,8 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     public var isShakable: Bool = true
     public var titleToRequestAuthentication: String = "Identify yourself!"
     
-    // private
-    public var view: UIView!
-    private var enableBiometricsAuthentication: Bool = false
+    internal var view: UIView!
+    internal var enableBiometricsAuthentication: Bool = false
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

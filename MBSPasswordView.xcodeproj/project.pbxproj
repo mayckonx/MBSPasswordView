@@ -30,6 +30,8 @@
 		EF43360A222BCA8B00F1C9BC /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433609222BCA8B00F1C9BC /* UIViewController+ext.swift */; };
 		EF43360D222BCAA100F1C9BC /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360B222BCAA000F1C9BC /* Result.swift */; };
 		EF43360E222BCAA100F1C9BC /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360C222BCAA100F1C9BC /* UserDefaultKeys.swift */; };
+		EF433610222BCD6800F1C9BC /* MBSPasswordViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */; };
+		EF433612222BD14E00F1C9BC /* MBSExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */; };
 		EFF7EEFE21932873003FA9C6 /* MBSPasswordView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		EF433609222BCA8B00F1C9BC /* UIViewController+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
 		EF43360B222BCAA000F1C9BC /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EF43360C222BCAA100F1C9BC /* UserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSPasswordViewTests.swift; sourceTree = "<group>"; };
+		EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +237,8 @@
 			children = (
 				EF13DF8121929411005C6CB7 /* MBSTopPasswordViewTests.swift */,
 				EF13DF8321929422005C6CB7 /* MBSBodyPasswordViewTests.swift */,
+				EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */,
+				EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */,
 				EF13DF67219293AA005C6CB7 /* Info.plist */,
 				EF13DF8021929410005C6CB7 /* MBSPasswordViewTests-Bridging-Header.h */,
 			);
@@ -472,6 +478,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF433612222BD14E00F1C9BC /* MBSExtensionsTests.swift in Sources */,
+				EF433610222BCD6800F1C9BC /* MBSPasswordViewTests.swift in Sources */,
 				EF13DF8421929422005C6CB7 /* MBSBodyPasswordViewTests.swift in Sources */,
 				EF13DF8221929411005C6CB7 /* MBSTopPasswordViewTests.swift in Sources */,
 			);
