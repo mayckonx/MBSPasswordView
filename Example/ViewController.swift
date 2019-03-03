@@ -17,8 +17,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.passwordView?.delegate = self
+       // customize()
+        
+        passwordView?.delegate = self
+        passwordView?.titleToRequestAuthentication = "Please, identify your self!"
+        passwordView?.start(enableBiometrics: true)
+        
     }
+    
+    /*private func customize() {
+        // customize top view
+        passwordView?.topView.dotColor = UIColor.blue
+        passwordView?.topView.errorBackgroundColor = UIColor.green
+        passwordView?.topView.labelColor = UIColor.red
+        passwordView?.topView.backgroundColor = UIColor.yellow
+        passwordView?.topView.font = UIFont(name: "Arial", size: 20)
+        
+        // customize body view
+        passwordView?.bodyView.btnBackgroundColor = UIColor.purple
+        passwordView?.bodyView.btnTextColor = UIColor.brown
+        passwordView?.bodyView.fontButtons = UIFont(name: "Arial", size: 20)
+        passwordView?.bodyView.fontDelete = UIFont(name: "Arial", size: 20)
+        
+    }*/
 }
 
 extension ViewController: MBSPasswordDelegate {
@@ -26,6 +47,27 @@ extension ViewController: MBSPasswordDelegate {
         print("Password confirmed. Result:\(result)")
         let alert = UIAlertController(title: "Success", message: "Password Validated!", preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
+    }
+    func passwordFromBiometrics(_ result: Result<[String]>) {
+        switch result {
+        case .success(let password):
+            print("Authenticated by password and biometrics. Password:\(password)")
+        case .error(let error):
+            print("Error to authenticate by biometrics...")
+            if let error = (error as? MBSAuthenticationIDError) {
+                switch error {
+                case .notRegistered:
+                    print("notRegistered")
+                case .invalidID:
+                    print("invalidID")
+                case .notSupported:
+                    print("device or so notSupported")
+                case .canceled:
+                    print("canceled")
+                    
+                }
+            }
+        }
     }
 }
 

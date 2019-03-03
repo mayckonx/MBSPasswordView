@@ -20,6 +20,7 @@ class MBSBodyPasswordViewTests: XCTestCase {
     
     override func setUp() {
         self.mbsPasswordView = loadView()
+        self.mbsPasswordView.cleanPasswordUserDefaults()
     }
     
     override func tearDown() {

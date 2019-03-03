@@ -23,6 +23,7 @@ class MBSTopPasswordViewTests: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        mbsPasswordView.cleanPasswordUserDefaults()
         mbsPasswordView.topView.delegate = nil
     }
     
@@ -75,11 +76,10 @@ class MBSTopPasswordViewTests: XCTestCase {
         topView.insert("1")
         topView.insert("2")
         topView.insert("3")
-        topView.insert("4")
         // remove the last
         topView.removeLast()
-        XCTAssertEqual(topView.passwordValues, ["1","2","3"])
-        XCTAssertEqual(topView.passwordViews.count, 3)
+        XCTAssertEqual(topView.passwordValues, ["1","2"])
+        XCTAssertEqual(topView.passwordViews.count, 2)
     }
     
     func testRemoveLastWithinZeroElements() {
@@ -104,6 +104,29 @@ class MBSTopPasswordViewTests: XCTestCase {
         XCTAssertEqual(topView.confirmationValues, ["1","2","3","4"])
         XCTAssertEqual(topView.passwordViews.count, 4)
     }
+    
+    func testIsLogin() {
+        let topView = mbsPasswordView.topView!
+        topView.passwordRegistered = ["1", "2", "3", "4"]
+        
+        XCTAssertEqual(topView.isConfirmationMode, true)
+    }
+    
+    func testIsLoginWithPasswordValuesSet() {
+        let topView = mbsPasswordView.topView!
+        topView.passwordRegistered = ["1", "2", "3", "4"]
+        
+        XCTAssertEqual(topView.passwordValues, ["1","2","3","4"])
+    }
+    
+    func testIsLoginConfirmed() {
+        let topView = mbsPasswordView.topView!
+        topView.passwordRegistered = ["1", "2", "3", "4"]
+        insertLoginMatchPassword()
+        XCTAssertEqual(topView.passwordValues, ["1","2","3","4"])
+        XCTAssertEqual(topView.confirmationValues, ["1","2","3","4"])
+    }
+    
     
     // MARK: - Shakable
     func testIsShakable() {
@@ -132,7 +155,7 @@ class MBSTopPasswordViewTests: XCTestCase {
     func testPasswordCall() {
         let mockDelegate = MockTopPasswordDelegate()
         mbsPasswordView.topView.delegate = mockDelegate
-        let delayExpectation = expectation(description: "Delegate method invalidMatch not called")
+        let delayExpectation = expectation(description: "Delegate method password not called")
         // must be called 1 time
         delayExpectation.expectedFulfillmentCount = 1
         
@@ -149,7 +172,7 @@ class MBSTopPasswordViewTests: XCTestCase {
     func testDelegateInvalidScenearios() {
         let mockDelegate = MockTopPasswordDelegate()
         mbsPasswordView.topView.delegate = mockDelegate
-        let delayExpectation = expectation(description: "Delegate method invalidMatch not called")
+        let delayExpectation = expectation(description: "Delegate methods not called")
         // must be called 1 time
         delayExpectation.expectedFulfillmentCount = 1
         
@@ -161,6 +184,25 @@ class MBSTopPasswordViewTests: XCTestCase {
         }
         mockDelegate.didCallInvalidMatch = {
             XCTFail("Mustn't be called")
+        }
+        waitForExpectations(timeout: 1.1)
+    }
+    
+    // MARK: Clean user defaults
+    func isUserDefaultsCleaned() {
+        let mockDelegate = MockTopPasswordDelegate()
+        mbsPasswordView.topView.delegate = mockDelegate
+        let delayExpectation = expectation(description: "Delegate method password not called")
+        // must be called 1 time
+        delayExpectation.expectedFulfillmentCount = 1
+        
+        insertMatchPasswords()
+        
+        mockDelegate.didCallPassword = { password in
+            XCTAssertNotNil(UserDefaults.value(forKey: MBSUserAuthetication.done.rawValue))
+            self.mbsPasswordView.cleanPasswordUserDefaults()
+            XCTAssertNil(UserDefaults.value(forKey: MBSUserAuthetication.done.rawValue))
+            delayExpectation.fulfill()
         }
         waitForExpectations(timeout: 1.1)
     }
@@ -200,6 +242,13 @@ extension MBSTopPasswordViewTests {
         }
     }
     
+    private func insertLoginMatchPassword() {
+        self.mbsPasswordView.topView.insert("1")
+        self.mbsPasswordView.topView.insert("2")
+        self.mbsPasswordView.topView.insert("3")
+        self.mbsPasswordView.topView.insert("4")
+    }
+    
     private func insertInvalidScenario(_ delayExpectation: XCTestExpectation) {
         self.mbsPasswordView.topView.insert("1")
         self.mbsPasswordView.topView.insert("2")
@@ -216,8 +265,13 @@ extension MBSTopPasswordViewTests {
 // MARK: - MOCK
 private final class MockTopPasswordDelegate: MBSTopPasswordDelegate {
     
-    var didCallInvalidMatch: (() -> Void)!
-    var didCallPassword: (([String]) -> Void)!
+    var didCallInvalidMatch: (() -> Void)
+    var didCallPassword: (([String]) -> Void)
+    
+    init() {
+        didCallInvalidMatch = { }
+        didCallPassword = { _ in }
+    }
     
     func invalidMatch() {
         didCallInvalidMatch()

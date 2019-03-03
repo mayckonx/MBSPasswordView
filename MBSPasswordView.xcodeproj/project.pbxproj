@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		924D2B052226E77B00772B01 /* Authenticatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924D2B042226E77B00772B01 /* Authenticatable.swift */; };
+		924D2B052226E77B00772B01 /* MBSAuthenticatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924D2B042226E77B00772B01 /* MBSAuthenticatable.swift */; };
 		924D2B082226E7A300772B01 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924D2B072226E7A300772B01 /* LocalAuthentication.framework */; };
 		925027FA2228271D00A1017D /* UserDefaults+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925027F92228271D00A1017D /* UserDefaults+ext.swift */; };
 		EF13DF61219293AA005C6CB7 /* MBSPasswordView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; };
@@ -27,6 +27,9 @@
 		EF13DF93219294C5005C6CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF92219294C5005C6CB7 /* Assets.xcassets */; };
 		EF13DF96219294C5005C6CB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF94219294C5005C6CB7 /* LaunchScreen.storyboard */; };
 		EF13DFA1219294C5005C6CB7 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13DFA0219294C5005C6CB7 /* ExampleTests.swift */; };
+		EF433602222AEBE100F1C9BC /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433601222AEBE100F1C9BC /* Result.swift */; };
+		EF433604222AF03F00F1C9BC /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433603222AF03F00F1C9BC /* UserDefaultKeys.swift */; };
+		EF433606222B00E100F1C9BC /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433605222B00E100F1C9BC /* UIViewController+ext.swift */; };
 		EFF7EEFE21932873003FA9C6 /* MBSPasswordView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -62,7 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		924D2B042226E77B00772B01 /* Authenticatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticatable.swift; sourceTree = "<group>"; };
+		924D2B042226E77B00772B01 /* MBSAuthenticatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSAuthenticatable.swift; sourceTree = "<group>"; };
 		924D2B072226E7A300772B01 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		925027F92228271D00A1017D /* UserDefaults+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ext.swift"; sourceTree = "<group>"; };
 		EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBSPasswordView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +93,9 @@
 		EF13DF9C219294C5005C6CB7 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF13DFA0219294C5005C6CB7 /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
 		EF13DFA2219294C5005C6CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF433601222AEBE100F1C9BC /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Result.swift; path = ../../../../SafePhotos/iOS/SafePhotosApp/SafePhotosApp/Scene/Logged/Main/Result.swift; sourceTree = "<group>"; };
+		EF433603222AF03F00F1C9BC /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultKeys.swift; path = ../../../../SafePhotos/iOS/SafePhotosApp/SafePhotosApp/Scene/Logged/Main/UserDefaultKeys.swift; sourceTree = "<group>"; };
+		EF433605222B00E100F1C9BC /* UIViewController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+ext.swift"; path = "../../../../SafePhotos/iOS/SafePhotosApp/SafePhotosApp/Scene/Logged/Main/UIViewController+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,7 @@
 				EF13DF75219293DD005C6CB7 /* UIColor+ext.swift */,
 				EF13DF73219293DD005C6CB7 /* UIView+ext.swift */,
 				925027F92228271D00A1017D /* UserDefaults+ext.swift */,
+				EF433605222B00E100F1C9BC /* UIViewController+ext.swift */,
 			);
 			path = ext;
 			sourceTree = "<group>";
@@ -175,7 +182,7 @@
 		924D2B032226E74F00772B01 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				924D2B042226E77B00772B01 /* Authenticatable.swift */,
+				924D2B042226E77B00772B01 /* MBSAuthenticatable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -235,6 +242,7 @@
 		EF13DF71219293AE005C6CB7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EF4335FF222A9B8000F1C9BC /* Util */,
 				924D2B032226E74F00772B01 /* Protocols */,
 				924D2B022226E67800772B01 /* ext */,
 				924D2AFE2226E61400772B01 /* UI */,
@@ -262,6 +270,15 @@
 				EF13DFA2219294C5005C6CB7 /* Info.plist */,
 			);
 			path = ExampleTests;
+			sourceTree = "<group>";
+		};
+		EF4335FF222A9B8000F1C9BC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				EF433601222AEBE100F1C9BC /* Result.swift */,
+				EF433603222AF03F00F1C9BC /* UserDefaultKeys.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,13 +454,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				924D2B052226E77B00772B01 /* Authenticatable.swift in Sources */,
+				EF433602222AEBE100F1C9BC /* Result.swift in Sources */,
+				EF433606222B00E100F1C9BC /* UIViewController+ext.swift in Sources */,
+				924D2B052226E77B00772B01 /* MBSAuthenticatable.swift in Sources */,
 				EF13DF7B219293DD005C6CB7 /* MBSButton.swift in Sources */,
 				EF13DF7E219293DD005C6CB7 /* MBSBodyPasswordView.swift in Sources */,
 				EF13DF7C219293DD005C6CB7 /* UIColor+ext.swift in Sources */,
 				EF13DF7A219293DD005C6CB7 /* UIView+ext.swift in Sources */,
 				EF13DF7F219293DD005C6CB7 /* MBSPasswordView.swift in Sources */,
 				EF13DF79219293DD005C6CB7 /* MBSTopPasswordView.swift in Sources */,
+				EF433604222AF03F00F1C9BC /* UserDefaultKeys.swift in Sources */,
 				925027FA2228271D00A1017D /* UserDefaults+ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

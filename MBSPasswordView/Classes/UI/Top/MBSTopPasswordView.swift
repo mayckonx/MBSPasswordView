@@ -15,15 +15,15 @@ public enum PasswordAnimation {
 }
 
 public protocol MBSTopPasswordViewType {
-    // kind of animation
+    /// kind of animation
     var passwordAnimation: PasswordAnimation { get set }
-    // color of password views
+    /// color of password views
     var dotColor: UIColor { get set }
-    // background which appears when passwords don't match
+    /// background which appears when passwords don't match
     var errorBackgroundColor: UIColor { get set }
-    // color of uilabel
+    /// color of uilabel
     var labelColor: UIColor { get set }
-    // font of label alert
+    /// font of label alert
     var font: UIFont? { get set }
 }
 
@@ -34,6 +34,15 @@ public protocol MBSTopPasswordDelegate: class {
 
 // Implementation
 public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
+    
+    enum ViewState {
+        case login
+        case confirmation
+        case validatePassword
+        case newPassword
+        case passwordInvalid
+        case passwordMatch
+    }
     
     @IBOutlet weak var lblPasswordRequest: UILabel!
     
@@ -47,14 +56,27 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
     public var font: UIFont? = UIFont(name: "Helvetica", size: 32) {
         didSet { self.lblPasswordRequest.font = font }
     }
+    
     // internal
     internal var passwordValues: [String] = []
     internal var confirmationValues: [String] = []
     internal var passwordViews: [UIView] = []
-    // private
+    internal var passwordRegistered: [String]? {
+        didSet {
+            if let password = passwordRegistered {
+                passwordValues.append(contentsOf: password)
+                changeStateTo(newState: .login)
+            }
+        }
+    }
+    internal var isConfirmationMode = false
     
+    // private
     private let passwordLenght: Int = 4
-    private var isConfirmationMode = false
+    private var viewState: ViewState = .newPassword
+    private var isLogin: Bool {
+        return self.passwordRegistered != nil
+    }
     
     // delegate
     weak var delegate: MBSTopPasswordDelegate!
@@ -70,7 +92,55 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
     }
     
     private func commonInit() {
-        self.backgroundColor = UIColor.flatDarkBlue
+        backgroundColor = UIColor.flatDarkBlue
+    }
+    
+    private func changeStateTo(newState: ViewState) {
+        self.viewState = newState
+        switch newState {
+        case .newPassword:
+            removeAllPasswordViews()
+            removePasswordArrayData()
+            passwordMode()
+            
+        case .confirmation:
+            self.switchMode {
+                self.removeAllPasswordViews()
+            }
+            
+        case .login:
+            registeredPassswordMode()
+            
+        case .validatePassword:
+            handleConfirmation()
+            
+        case .passwordInvalid:
+            if isLogin {
+                changeToNewStateWithDelay(newState: .login) {
+                    self.invalidPassword()
+                }
+            } else {
+                changeToNewStateWithDelay(newState: .newPassword) {
+                    self.invalidPassword()
+                }
+            }
+            
+        case .passwordMatch:
+            delegate?.password(passwordValues)
+        }
+    }
+    
+    private func invalidPassword() {
+        self.removeAllPasswordViews()
+        self.removePasswordArrayData()
+        self.notifyPasswordInvalid()
+    }
+    
+    private func changeToNewStateWithDelay(newState: ViewState, completion: @escaping (() -> Void)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.changeStateTo(newState: newState)
+            completion()
+        }
     }
     
     // MARK: Flow methods
@@ -79,28 +149,26 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         if passwordViews.count == passwordLenght { return }
         // normal flow
         if isConfirmationMode {
-            self.confirmationValues.append(value)
-            self.addDotView()
+            confirmationValues.append(value)
+            addDotView()
             if confirmationValues.count == passwordLenght {
-                handleConfirmation()
+                changeStateTo(newState: .validatePassword)
             }
         } else {
-            self.passwordValues.append(value)
-            self.addDotView()
+            passwordValues.append(value)
+            addDotView()
             if passwordValues.count == passwordLenght {
-                self.switchMode {
-                   self.removeAllPasswordViews()
-                }
+               changeStateTo(newState: .confirmation)
             }
         }
     }
     
     internal func removeLast() {
-        guard let viewPassword = self.passwordViews.last else { return }
-        self.passwordViews.removeLast()
-        self.hideAnimatedPassword(viewPassword)
+        guard let viewPassword = passwordViews.last else { return }
+        passwordViews.removeLast()
+        hideAnimatedPassword(viewPassword)
         
-        if isConfirmationMode {
+        if isConfirmationMode || isLogin {
             confirmationValues.removeLast()
         } else {
             passwordValues.removeLast()
@@ -111,10 +179,10 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
 // MARK: Auxiliar flow methods
 extension MBSTopPasswordView {
     private func insertPasswordView() -> UIView {
-        var xPosition = self.frame.size.width - (self.frame.size.width * 0.8)
+        var xPosition = frame.size.width - (frame.size.width * 0.8)
         
         if let last = passwordViews.last {
-            xPosition = last.frame.origin.x + (self.frame.size.width * 0.17)
+            xPosition = last.frame.origin.x + (frame.size.width * 0.17)
         }
         
         // add the view
@@ -129,33 +197,31 @@ extension MBSTopPasswordView {
         return viewPassword
     }
     private func removeAllPasswordViews() {
-        for viewPassword in self.passwordViews {
+        for viewPassword in passwordViews {
             viewPassword.removeFromSuperview()
         }
-        self.passwordViews = []
+        passwordViews = []
     }
     private func removePasswordArrayData() {
         removeAllPasswordViews()
-        self.passwordValues.removeAll()
-        self.confirmationValues.removeAll()
+        if passwordRegistered == nil {
+            passwordValues.removeAll()
+        }
+        confirmationValues.removeAll()
     }
     
     private func handleConfirmation() {
         if passwordValues == confirmationValues {
-            self.delegate?.password(passwordValues)
+            changeStateTo(newState: .passwordMatch)
         } else {
-            switchMode {
-                self.notifyPasswordInvalid()
-                self.removeAllPasswordViews()
-                self.removePasswordArrayData()
-            }
+            changeStateTo(newState: .passwordInvalid)
         }
     }
     
     private func addDotView() {
-        let passwordView = self.insertPasswordView()
-        self.passwordViews.append(passwordView)
-        self.showAnimatedPassword(passwordView)
+        let passwordView = insertPasswordView()
+        passwordViews.append(passwordView)
+        showAnimatedPassword(passwordView)
     }
     
     private func notifyPasswordInvalid() {
@@ -206,7 +272,7 @@ extension MBSTopPasswordView {
     
     private func showErrorAnimation(with completion: @escaping () -> Void) {
         let currentBackgroundColor = backgroundColor
-        self.backgroundColor = errorBackgroundColor
+        backgroundColor = errorBackgroundColor
         UIView.animate(withDuration: 2.0,
                        animations: {
             self.backgroundColor = currentBackgroundColor
@@ -218,12 +284,12 @@ extension MBSTopPasswordView {
 // MARK: Get views
 extension MBSTopPasswordView {
     private func getSuperview() -> UIView {
-        guard let superview = self.superview else { fatalError("There is no superview. Please, add a superview to this view.") }
+        guard let superview = superview else { fatalError("There is no superview. Please, add a superview to this view.") }
         return superview
     }
     
     private func getLastPasswordView() -> UIView {
-        guard let passwordView = self.passwordViews.last else { fatalError("Crash on apple API. Attribute: isEmpty is false, but there's no element on array") }
+        guard let passwordView = passwordViews.last else { fatalError("Crash on apple API. Attribute: isEmpty is false, but there's no element on array") }
         return passwordView
     }
 }
@@ -232,10 +298,14 @@ extension MBSTopPasswordView {
 extension MBSTopPasswordView {
     private func confirmationMode() {
         isConfirmationMode = true
-        self.lblPasswordRequest.text = "Confirm new password"
+        lblPasswordRequest.text = "Confirm new password"
     }
     private func passwordMode() {
         isConfirmationMode = false
-        self.lblPasswordRequest.text = "Enter new password"
+        lblPasswordRequest.text = "Enter new password"
+    }
+    private func registeredPassswordMode() {
+        isConfirmationMode = true
+        lblPasswordRequest.text = "Inform your password"
     }
 }
