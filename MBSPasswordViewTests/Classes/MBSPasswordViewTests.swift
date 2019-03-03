@@ -27,6 +27,20 @@ class MBSPasswordViewTests: XCTestCase {
         mbsPasswordView.bodyView.delegate = nil
     }
     
+    func testInitWithFrame() {
+        let view = MBSPasswordView(frame: .zero)
+        
+        XCTAssertNotNil(view.bodyView.delegate)
+        XCTAssertNotNil(view.topView.delegate)
+        
+        // view is not nil
+        XCTAssertNotNil(view.view)
+        
+        // and views disabled
+        XCTAssertEqual(view.topView.isUserInteractionEnabled, false)
+        XCTAssertEqual(view.bodyView.isUserInteractionEnabled, false)
+    }
+    
     // MARK: - Test properties initialization and assignments
     func testCommonInit() {
         // delegate is set
