@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/mayckonx/MBSPasswordView.svg?branch=master)](https://travis-ci.org/mayckonx/MBSPasswordView) [![Coverage Status](https://coveralls.io/repos/github/mayckonx/MBSPasswordView/badge.svg?branch=master)](https://coveralls.io/github/mayckonx/MBSPasswordView?branch=master) [![Platform](https://img.shields.io/cocoapods/p/MBSPasswordView.svg?style=flat)](http://cocoapods.org/pods/MBSPasswordView) [![Downloads](https://img.shields.io/cocoapods/dt/MBSPasswordView.svg)](http://cocoapods.org/pods/MBSPasswordView)
+[![Build Status](https://travis-ci.org/mayckonx/MBSPasswordView.svg?branch=master)](https://travis-ci.org/mayckonx/MBSPasswordView) [![Coverage Status](https://coveralls.io/repos/github/mayckonx/MBSPasswordView/badge.svg?branch=master)](https://coveralls.io/github/mayckonx/MBSPasswordView?branch=master) [![Platform](https://img.shields.io/cocoapods/p/MBSPasswordView.svg?style=flat)](http://cocoapods.org/pods/MBSPasswordView)
 
 **MBSPasswordView** is a custom view that provides an easy way to use a block-screen password.
 
