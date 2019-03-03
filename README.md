@@ -76,7 +76,8 @@ passwordView?.start(enableBiometrics: true)
 }
 ```
 
-That's it. If you enable biometrics, you get the password and automatically request the TouchID/FaceID every time/ Without write one single line of code! 🤗
+That's it. If you enable biometrics, you get the password and automatically request the TouchID/FaceID every time. You just need to pass enableBiometrics: true on the start method.😎
+
 It's done brah! 
 
 You can customize the view. In the sample you can see how to access the properties and change it to your preferences. 
