@@ -33,6 +33,7 @@
 		EF433610222BCD6800F1C9BC /* MBSPasswordViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */; };
 		EF433612222BD14E00F1C9BC /* MBSExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */; };
 		EF433614222C073200F1C9BC /* MBSUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433613222C073200F1C9BC /* MBSUserDefaultsTests.swift */; };
+		EF433616222C0DCF00F1C9BC /* MBSButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433615222C0DCF00F1C9BC /* MBSButtonTests.swift */; };
 		EFF7EEFE21932873003FA9C6 /* MBSPasswordView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF13DF57219293AA005C6CB7 /* MBSPasswordView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSPasswordViewTests.swift; sourceTree = "<group>"; };
 		EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSExtensionsTests.swift; sourceTree = "<group>"; };
 		EF433613222C073200F1C9BC /* MBSUserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSUserDefaultsTests.swift; sourceTree = "<group>"; };
+		EF433615222C0DCF00F1C9BC /* MBSButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBSButtonTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,11 +239,7 @@
 		EF13DF64219293AA005C6CB7 /* MBSPasswordViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF13DF8121929411005C6CB7 /* MBSTopPasswordViewTests.swift */,
-				EF13DF8321929422005C6CB7 /* MBSBodyPasswordViewTests.swift */,
-				EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */,
-				EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */,
-				EF433613222C073200F1C9BC /* MBSUserDefaultsTests.swift */,
+				EF433617222C0DD700F1C9BC /* Classes */,
 				EF13DF67219293AA005C6CB7 /* Info.plist */,
 				EF13DF8021929410005C6CB7 /* MBSPasswordViewTests-Bridging-Header.h */,
 			);
@@ -288,6 +286,19 @@
 				EF43360C222BCAA100F1C9BC /* UserDefaultKeys.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EF433617222C0DD700F1C9BC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EF13DF8121929411005C6CB7 /* MBSTopPasswordViewTests.swift */,
+				EF13DF8321929422005C6CB7 /* MBSBodyPasswordViewTests.swift */,
+				EF43360F222BCD6800F1C9BC /* MBSPasswordViewTests.swift */,
+				EF433611222BD14E00F1C9BC /* MBSExtensionsTests.swift */,
+				EF433613222C073200F1C9BC /* MBSUserDefaultsTests.swift */,
+				EF433615222C0DCF00F1C9BC /* MBSButtonTests.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,6 +496,7 @@
 				EF433610222BCD6800F1C9BC /* MBSPasswordViewTests.swift in Sources */,
 				EF433614222C073200F1C9BC /* MBSUserDefaultsTests.swift in Sources */,
 				EF13DF8421929422005C6CB7 /* MBSBodyPasswordViewTests.swift in Sources */,
+				EF433616222C0DCF00F1C9BC /* MBSButtonTests.swift in Sources */,
 				EF13DF8221929411005C6CB7 /* MBSTopPasswordViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
