@@ -19,11 +19,11 @@ public enum MBSAuthenticationIDError: Error {
 public protocol MBSAuthenticatable {
     func isTouchIDAvailable() -> Bool
     func isFaceIDAvailable() -> Bool
-    func authenticateByBiometrics(title: String, result: @escaping ((Result<Bool>) -> Void))
+    func authenticateByBiometrics(title: String, result: @escaping ((MBSPasswordResult<Bool>) -> Void))
 }
 
 extension MBSAuthenticatable where Self: UIView {
-    public func authenticateByBiometrics(title: String, result:  @escaping ((Result<Bool>) -> Void)) {
+    public func authenticateByBiometrics(title: String, result:  @escaping ((MBSPasswordResult<Bool>) -> Void)) {
         let context = LAContext()
         var error: NSError?
 

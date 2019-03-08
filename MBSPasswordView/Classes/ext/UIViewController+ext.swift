@@ -11,6 +11,6 @@ import Foundation
 // Workaround to make those method optionals
 // Perhaps the user wants to use only one of them
 extension MBSPasswordDelegate where Self: UIViewController {
-    func passwordFromBiometrics(_ result: Result<[String]>) {}
+    func passwordFromBiometrics(_ result: MBSPasswordResult<[String]>) {}
     func password(_ result: [String]) {}
 }
