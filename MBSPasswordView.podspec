@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "MBSPasswordView"
-  s.version               = '1.0.2'
+  s.version               = '1.0.4'
   s.homepage              = "https://github.com/mayckonx/#{s.name}"
   s.license               = { type: 'MIT', file: 'LICENSE' }
   s.author                = 'Mayckon Barbosa da Silva'

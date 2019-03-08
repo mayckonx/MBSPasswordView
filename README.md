@@ -43,7 +43,7 @@ github "mayckonx/MBSPasswordView"
 import MBSPasswordView
 ```
 
-2. Go to your Storyboard/XIB -> Identity Inspector and change your class and module to:
+2. Go to your Storyboard/XIB -> Identity Inspector and change your UIView class and module to:
 ```swift
 MBSPasswordView
 ```
@@ -56,10 +56,10 @@ MBSPasswordView
 4. Implement the protocol to get the password result.
 ```swift
 extension ViewController: MBSPasswordDelegate {
-     func password(_ result: [String]) {
+     func password(_ result: [String]) { // optional
         print("Password:\(result)")
     }
-    func passwordFromBiometrics(_ result: Result<[String]>) {
+    func passwordFromBiometrics(_ result: Result<[String]>) { // optional
         print("Result:\(result)")
     }
 }
