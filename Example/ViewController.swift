@@ -48,7 +48,7 @@ extension ViewController: MBSPasswordDelegate {
         let alert = UIAlertController(title: "Success", message: "Password Validated!", preferredStyle: .alert)
         self.present(alert, animated: true, completion: nil)
     }
-    func passwordFromBiometrics(_ result: Result<[String]>) {
+    func passwordFromBiometrics(_ result: MBSPasswordResult<[String]>) {
         switch result {
         case .success(let password):
             print("Authenticated by password and biometrics. Password:\(password)")

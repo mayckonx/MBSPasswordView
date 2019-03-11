@@ -6,6 +6,8 @@ xcode_project: MBSPasswordView.xcodeproj
 before_install:
   - rvm install 2.4.1
   - gem install slather --no-ri --no-rdoc
+  - gem install danger --no-ri --no-rdoc
+  - gem install danger-swiftlint --no-ri --no-rdoc
 
 script:
   - xcodebuild test -project MBSPasswordView.xcodeproj -scheme MBSPasswordView -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
