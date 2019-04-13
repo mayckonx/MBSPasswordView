@@ -27,6 +27,7 @@
 		EF13DF93219294C5005C6CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF92219294C5005C6CB7 /* Assets.xcassets */; };
 		EF13DF96219294C5005C6CB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF13DF94219294C5005C6CB7 /* LaunchScreen.storyboard */; };
 		EF13DFA1219294C5005C6CB7 /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF13DFA0219294C5005C6CB7 /* ExampleTests.swift */; };
+		EF154CCA22624EF5005C3B28 /* LAContext+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF154CC922624EF5005C3B28 /* LAContext+ext.swift */; };
 		EF43360A222BCA8B00F1C9BC /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF433609222BCA8B00F1C9BC /* UIViewController+ext.swift */; };
 		EF43360D222BCAA100F1C9BC /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360B222BCAA000F1C9BC /* Result.swift */; };
 		EF43360E222BCAA100F1C9BC /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43360C222BCAA100F1C9BC /* UserDefaultKeys.swift */; };
@@ -97,6 +98,7 @@
 		EF13DF9C219294C5005C6CB7 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF13DFA0219294C5005C6CB7 /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
 		EF13DFA2219294C5005C6CB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF154CC922624EF5005C3B28 /* LAContext+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LAContext+ext.swift"; sourceTree = "<group>"; };
 		EF433609222BCA8B00F1C9BC /* UIViewController+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
 		EF43360B222BCAA000F1C9BC /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		EF43360C222BCAA100F1C9BC /* UserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				EF13DF73219293DD005C6CB7 /* UIView+ext.swift */,
 				925027F92228271D00A1017D /* UserDefaults+ext.swift */,
 				EF433609222BCA8B00F1C9BC /* UIViewController+ext.swift */,
+				EF154CC922624EF5005C3B28 /* LAContext+ext.swift */,
 			);
 			path = ext;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF154CCA22624EF5005C3B28 /* LAContext+ext.swift in Sources */,
 				EF43360A222BCA8B00F1C9BC /* UIViewController+ext.swift in Sources */,
 				924D2B052226E77B00772B01 /* MBSAuthenticatable.swift in Sources */,
 				EF13DF7B219293DD005C6CB7 /* MBSButton.swift in Sources */,

@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import LocalAuthentication
+
+public enum KindBiometrics: String {
+    case touchID = "Touch ID"
+    case faceID = "Face ID"
+    case none = ""
+}
 
 public protocol MBSPasswordViewType {
+    static var isBiometricsActivate: Bool { get set }
+    static func deviceBiometricsKind() -> KindBiometrics
+    
     var isShakable: Bool { get set }
     var titleToRequestAuthentication: String { get set }
     func changeExistingPassword()
@@ -30,7 +40,17 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     // MARK: - MBSPasswordViewType protocol vars
     public var isShakable: Bool = true
     public var titleToRequestAuthentication: String = "Identify yourself!"
-
+    public static var isBiometricsActivate: Bool {
+        get {
+            let userDefaults = UserDefaults()
+            return userDefaults.value(forKey: MBSPasswordSetValues.isBiometricsActivate.rawValue) != nil
+        }
+        set {
+            let userDefaults = UserDefaults()
+            userDefaults.set(newValue, forKey: MBSPasswordSetValues.isBiometricsActivate.rawValue)
+        }
+    }
+    
     internal var view: UIView!
     internal var enableBiometricsAuthentication: Bool = false
     
@@ -86,6 +106,18 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     
     public func changeExistingPassword() {
         self.topView.changeExistingPassword = true
+    }
+    
+    public static func deviceBiometricsKind() -> KindBiometrics {
+        let kind = LAContext().biometricType
+        switch kind {
+        case .faceID:
+            return KindBiometrics.faceID
+        case .touchID:
+            return KindBiometrics.touchID
+        case .none:
+            return KindBiometrics.none
+        }
     }
 }
 
@@ -153,7 +185,6 @@ extension MBSPasswordView: MBSAuthenticatable {
         }
     }
 }
-
 
 
 

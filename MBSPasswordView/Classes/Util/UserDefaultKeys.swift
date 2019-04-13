@@ -11,3 +11,7 @@ import Foundation
 public enum MBSUserAuthetication: String {
     case done
 }
+
+public enum MBSPasswordSetValues: String {
+    case isBiometricsActivate = "isBiometricsActivate"
+}
