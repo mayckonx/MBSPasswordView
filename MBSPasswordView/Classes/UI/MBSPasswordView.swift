@@ -43,7 +43,10 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     public static var isBiometricsActivate: Bool {
         get {
             let userDefaults = UserDefaults()
-            return userDefaults.value(forKey: MBSPasswordSetValues.isBiometricsActivate.rawValue) != nil
+            if let value = userDefaults.value(forKey: MBSPasswordSetValues.isBiometricsActivate.rawValue) as? Bool {
+                return value
+            }
+            return false
         }
         set {
             let userDefaults = UserDefaults()
