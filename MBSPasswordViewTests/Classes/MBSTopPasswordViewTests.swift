@@ -169,6 +169,24 @@ class MBSTopPasswordViewTests: XCTestCase {
         waitForExpectations(timeout: 1.1)
     }
     
+    func testNewStateAfterAssignChangePassword() {
+        mbsPasswordView.topView.changeExistingPassword = true
+        
+        XCTAssertEqual(mbsPasswordView.topView.changeExistingPassword, true)
+    }
+    
+    func testBiometricsActivate() {
+        MBSPasswordView.isBiometricsActivate = true
+        
+        XCTAssertEqual(MBSPasswordView.isBiometricsActivate, true)
+    }
+    
+    func testBiometricsActivateFalse() {
+        MBSPasswordView.isBiometricsActivate = false
+        
+        XCTAssertEqual(MBSPasswordView.isBiometricsActivate, false)
+    }
+    
     func testDelegateInvalidScenearios() {
         let mockDelegate = MockTopPasswordDelegate()
         mbsPasswordView.topView.delegate = mockDelegate
