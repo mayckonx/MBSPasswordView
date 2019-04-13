@@ -11,7 +11,7 @@ import UIKit
 public protocol MBSPasswordViewType {
     var isShakable: Bool { get set }
     var titleToRequestAuthentication: String { get set }
-    
+    func changeExistingPassword()
     func start(enableBiometrics: Bool)
 }
 
@@ -30,7 +30,7 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     // MARK: - MBSPasswordViewType protocol vars
     public var isShakable: Bool = true
     public var titleToRequestAuthentication: String = "Identify yourself!"
-    
+
     internal var view: UIView!
     internal var enableBiometricsAuthentication: Bool = false
     
@@ -69,17 +69,23 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
         topView.isUserInteractionEnabled = false
         bodyView.isUserInteractionEnabled = false
     }
+    
     private func enableViews() {
         topView.isUserInteractionEnabled = true
         bodyView.isUserInteractionEnabled = true
     }
     
+    // MARK: - MBSPasswordViewType protocol methods
     public func start(enableBiometrics: Bool) {
         enableViews()
         enableBiometricsAuthentication = enableBiometrics
         if let password = passwordRegistered() {
             callBiometricsIfEnabled(password)
         }
+    }
+    
+    public func changeExistingPassword() {
+        self.topView.changeExistingPassword = true
     }
 }
 
@@ -110,10 +116,8 @@ extension MBSPasswordView: MBSBodyPasswordDelegate {
 // MARK: - Flag the authentication
 extension MBSPasswordView {
     private func registerPassword(_ password: [String]) {
-        if passwordRegistered() == nil {
-            let userDefaults = UserDefaults()
-            userDefaults.set(password, forKey: MBSUserAuthetication.done.rawValue)
-        }
+        let userDefaults = UserDefaults()
+        userDefaults.set(password, forKey: MBSUserAuthetication.done.rawValue)
     }
     
     private func passwordRegistered() -> [String]? {

@@ -42,6 +42,8 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         case newPassword
         case passwordInvalid
         case passwordMatch
+        case changePasswordRequest
+        case changePasswordNewPassword
     }
     
     @IBOutlet weak var lblPasswordRequest: UILabel!
@@ -66,6 +68,15 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
             if let password = passwordRegistered {
                 passwordValues.append(contentsOf: password)
                 changeStateTo(newState: .login)
+            }
+        }
+    }
+    internal var changeExistingPassword = false {
+        didSet {
+            if self.changeExistingPassword, let password = passwordRegistered {
+                self.isConfirmationMode = true
+                passwordValues = password
+                changeStateTo(newState: .changePasswordRequest)
             }
         }
     }
@@ -111,12 +122,25 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         case .login:
             registeredPassswordMode()
             
+        case .changePasswordRequest:
+            changePasswordMode()
+        
+        case .changePasswordNewPassword:
+            isConfirmationMode = false
+            changeExistingPassword = false
+            passwordRegistered = nil
+            
+            removeAllPasswordViews()
+            removePasswordArrayData()
+            passwordMode()
+            
         case .validatePassword:
             handleConfirmation()
             
         case .passwordInvalid:
             if isLogin {
-                changeToNewStateWithDelay(newState: .login) {
+                let newState = changeExistingPassword ? ViewState.changePasswordRequest : ViewState.login
+                changeToNewStateWithDelay(newState: newState) {
                     self.invalidPassword()
                 }
             } else {
@@ -136,10 +160,10 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         self.notifyPasswordInvalid()
     }
     
-    private func changeToNewStateWithDelay(newState: ViewState, completion: @escaping (() -> Void)) {
+    private func changeToNewStateWithDelay(newState: ViewState, completion: (() -> Void)?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.changeStateTo(newState: newState)
-            completion()
+            completion?()
         }
     }
     
@@ -151,6 +175,7 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         if isConfirmationMode {
             confirmationValues.append(value)
             addDotView()
+
             if confirmationValues.count == passwordLenght {
                 changeStateTo(newState: .validatePassword)
             }
@@ -158,7 +183,7 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
             passwordValues.append(value)
             addDotView()
             if passwordValues.count == passwordLenght {
-               changeStateTo(newState: .confirmation)
+                changeStateTo(newState: .confirmation)
             }
         }
     }
@@ -212,7 +237,11 @@ extension MBSTopPasswordView {
     
     private func handleConfirmation() {
         if passwordValues == confirmationValues {
-            changeStateTo(newState: .passwordMatch)
+            if changeExistingPassword {
+                changeToNewStateWithDelay(newState: .changePasswordNewPassword, completion: nil)
+            } else {
+                changeStateTo(newState: .passwordMatch)
+            }
         } else {
             changeStateTo(newState: .passwordInvalid)
         }
@@ -263,9 +292,11 @@ extension MBSTopPasswordView {
     
     private func switchMode(with completion: @escaping (() -> Void)) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.isConfirmationMode ?
-                self.passwordMode():
-                self.confirmationMode()
+            if self.viewState == .changePasswordRequest {
+                self.passwordMode()
+            } else {
+                self.isConfirmationMode ? self.passwordMode() : self.confirmationMode()
+            }
             completion()
         }
     }
@@ -275,8 +306,8 @@ extension MBSTopPasswordView {
         backgroundColor = errorBackgroundColor
         UIView.animate(withDuration: 2.0,
                        animations: {
-            self.backgroundColor = currentBackgroundColor
-            completion()
+                        self.backgroundColor = currentBackgroundColor
+                        completion()
         })
     }
 }
@@ -307,5 +338,9 @@ extension MBSTopPasswordView {
     private func registeredPassswordMode() {
         isConfirmationMode = true
         lblPasswordRequest.text = "Inform your password"
+    }
+    private func changePasswordMode() {
+        isConfirmationMode = true
+        lblPasswordRequest.text = "Inform the current password"
     }
 }
