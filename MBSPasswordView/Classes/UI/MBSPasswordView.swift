@@ -17,7 +17,7 @@ public protocol MBSPasswordViewType {
 
 public protocol MBSPasswordDelegate: class {
     func password(_ result: [String])
-    func passwordFromBiometrics(_ result: Result<[String]>)
+    func passwordFromBiometrics(_ result: MBSPasswordResult<[String]>)
 }
 
 public class MBSPasswordView: UIView, MBSPasswordViewType {
@@ -141,11 +141,11 @@ extension MBSPasswordView: MBSAuthenticatable {
             self.authenticateByBiometrics(title: titleToRequestAuthentication) { result in
                 switch result {
                 case .success:
-                    self.delegate?.passwordFromBiometrics(Result.success(password))
+                    self.delegate?.passwordFromBiometrics(MBSPasswordResult.success(password))
                 case .error(let error):
                     // we won't request on the next try... User should try by password
                     self.enableBiometricsAuthentication = false
-                    self.delegate?.passwordFromBiometrics(Result.error(error))
+                    self.delegate?.passwordFromBiometrics(MBSPasswordResult.error(error))
                 }
             }
         } else {

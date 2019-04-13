@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Result<T> {
+public enum MBSPasswordResult<T> {
     case success(T)
     case error(Error)
 }
