@@ -21,7 +21,8 @@ class ViewController: UIViewController {
         
         passwordView?.delegate = self
         passwordView?.titleToRequestAuthentication = "Please, identify your self!"
-        passwordView?.start(enableBiometrics: false)
+        passwordView?.start(enableBiometrics: true)
+
         // when user wants to change the registered password... you just use this method and mbspasswordview will take care of it and gives you the new password on the password delegate method.
         //passwordView?.changeExistingPassword()
         

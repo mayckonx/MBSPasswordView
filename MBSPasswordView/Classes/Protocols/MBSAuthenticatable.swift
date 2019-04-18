@@ -35,37 +35,12 @@ extension MBSAuthenticatable where Self: UIView {
                     if success {
                         result(.success(true))
                     } else {
-                        guard let error = error else {
-                            result(.error(MBSAuthenticationIDError.canceled))
-                            return
-                        }
-                        switch (error)
-                        {
-                        case LAError.authenticationFailed:
-                            result(.error(MBSAuthenticationIDError.invalidID))
-                            break
-                        case LAError.userCancel:
-                            result(.error(MBSAuthenticationIDError.canceled))
-                            break
-                        case LAError.userFallback:
-                            result(.error(MBSAuthenticationIDError.canceled))
-                            break
-                        case LAError.systemCancel:
-                            result(.error(MBSAuthenticationIDError.canceled))
-                            break
-                        case LAError.passcodeNotSet:
-                            result(.error(MBSAuthenticationIDError.notRegistered))
-                            break
-                        default:
-                            result(.error(MBSAuthenticationIDError.canceled))
-                            break
-                        }
-                        return
+                        result(.error(error))
                     }
                 }
             }
         } else {
-            // device not supported
+            // device not supported or user tried several times and the OS blocked for a time...
             result(.error(MBSAuthenticationIDError.notSupported))
         }
     }

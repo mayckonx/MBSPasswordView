@@ -10,5 +10,5 @@ import Foundation
 
 public enum MBSPasswordResult<T> {
     case success(T)
-    case error(Error)
+    case error(Error?)
 }
