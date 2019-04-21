@@ -74,17 +74,28 @@ class MBSPasswordViewTests: XCTestCase {
         }
     }
     
-    func testShakeView() {
-        let kind = MBSPasswordView.deviceBiometricsKind()
-        let biometricsOfDevice = LAContext().biometryType
-        switch biometricsOfDevice {
-        case .faceID:
-            XCTAssertEqual(kind, .faceID)
-        case .touchID:
-            XCTAssertEqual(kind, .touchID)
-        case .none:
-            XCTAssertEqual(kind, .none)
-        }
+    func testSelected() {
+        mbsPasswordView.selected("a")
+        let value = mbsPasswordView.topView.passwordValues[0]
+        XCTAssertEqual(value, "a")
+    }
+    
+    func testRemoveLast() {
+        mbsPasswordView.selected("a")
+        mbsPasswordView.selected("b")
+        mbsPasswordView.selected("c")
+        mbsPasswordView.removeLast()
+        
+        let count = mbsPasswordView.topView.passwordValues.count
+        XCTAssertEqual(count, 2)
+        
+        mbsPasswordView.removeLast()
+        let oneCount = mbsPasswordView.topView.passwordValues.count
+        XCTAssertEqual(oneCount, 1)
+        
+        mbsPasswordView.removeLast()
+        let zeroCount = mbsPasswordView.topView.passwordValues.count
+        XCTAssertEqual(zeroCount, 0)
     }
     
     // MARK: - Test properties initialization and assignments
