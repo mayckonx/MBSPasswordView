@@ -339,6 +339,13 @@ extension MBSTopPasswordView {
         isConfirmationMode = true
         lblPasswordRequest.text = "Inform your password"
     }
+    func updateLabel() {
+        if changeExistingPassword {
+            changePasswordMode()
+        } else {
+            registeredPassswordMode()
+        }
+    }
     private func changePasswordMode() {
         isConfirmationMode = true
         lblPasswordRequest.text = "Inform the current password"

@@ -409,6 +409,11 @@
 					};
 					EF13DF88219294C4005C6CB7 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					EF13DF9B219294C5005C6CB7 = {
 						CreatedOnToolsVersion = 10.0;

@@ -12,6 +12,16 @@ public enum MBSUserAuthetication: String {
     case done
 }
 
+public enum MBSAttemptsState: String {
+    case block
+    case unblock
+}
+
+public enum MBSAttempts: String {
+    case quantity
+    case minutes
+}
+
 public enum MBSPasswordSetValues: String {
     case isBiometricsActivate = "isBiometricsActivate"
 }

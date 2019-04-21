@@ -20,6 +20,10 @@ class MBSPasswordViewTests: XCTestCase {
     override func setUp() {
         self.mbsPasswordView = loadView()
         self.mbsPasswordView.cleanPasswordUserDefaults()
+        
+        let userDefaults = UserDefaults()
+        userDefaults.removeObject(forKey: "\(MBSAttempts.quantity)")
+        userDefaults.synchronize()
     }
     
     override func tearDown() {
@@ -39,6 +43,16 @@ class MBSPasswordViewTests: XCTestCase {
         // and views disabled
         XCTAssertEqual(view.topView.isUserInteractionEnabled, false)
         XCTAssertEqual(view.bodyView.isUserInteractionEnabled, false)
+    }
+    
+    func testIsLimitAttemptsOutOne() {
+        XCTAssertEqual(self.mbsPasswordView.isLimitAttemptsOut(), false)
+    }
+    
+    func testIsLimitAttemptsOutThree() {
+        _ = self.mbsPasswordView.isLimitAttemptsOut()
+        _ = self.mbsPasswordView.isLimitAttemptsOut()
+        XCTAssertEqual(self.mbsPasswordView.isLimitAttemptsOut(), true)
     }
     
     // MARK: - Test properties initialization and assignments

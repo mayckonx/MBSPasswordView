@@ -57,6 +57,12 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     internal var view: UIView!
     internal var enableBiometricsAuthentication: Bool = false
     
+    private var count = 120
+    private var timer: Timer!
+    private var isTimerRunning = false
+    private var topViewTitle = ""
+    private var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
@@ -100,7 +106,7 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
     
     // MARK: - MBSPasswordViewType protocol methods
     public func start(enableBiometrics: Bool) {
-        enableViews()
+        checkIfRunningDisableState()
         enableBiometricsAuthentication = enableBiometrics
         if let password = passwordRegistered() {
             callBiometricsIfEnabled(password)
@@ -132,9 +138,118 @@ extension MBSPasswordView: MBSTopPasswordDelegate, Shakable {
         callBiometricsIfEnabled(result)
     }
     public func invalidMatch() {
+        shakeView()
+        disableStateIfNeeded()
+    }
+    private func shakeView() {
         if isShakable {
-           shake()
+            shake()
         }
+    }
+}
+
+// MARK: - Disable and Enable View State
+extension MBSPasswordView {
+    // limit is 2
+    func isLimitAttemptsOut() -> Bool {
+        let userDefaults = UserDefaults()
+        if let quantity = userDefaults.object(forKey: MBSAttempts.quantity.rawValue) as? Int {
+            let newQuantity = quantity - 1
+            userDefaults.set(newQuantity, forKey: MBSAttempts.quantity.rawValue)
+            userDefaults.synchronize()
+            return newQuantity == 0
+        } else {
+           userDefaults.set(2, forKey: MBSAttempts.quantity.rawValue)
+           userDefaults.synchronize()
+           return false
+        }
+    }
+    
+    private func disableStateIfNeeded() {
+        if isLimitAttemptsOut() {
+            registerMinutesCount()
+            disableState()
+        }
+    }
+    
+    private func disableState() {
+        alpha = 0.7
+        disableViews()
+        runTimer()
+    }
+    
+    private func registerMinutesCount(_ minutes: Int = 2) {
+        let userDefaults = UserDefaults()
+        userDefaults.set(minutes, forKey: MBSAttempts.minutes.rawValue)
+        userDefaults.synchronize()
+    }
+    
+    private func cleanMinutesCount() {
+        let userDefaults = UserDefaults()
+        userDefaults.removeObject(forKey: MBSAttempts.minutes.rawValue)
+        userDefaults.synchronize()
+    }
+    
+    private func checkIfRunningDisableState() {
+        let userDefaults = UserDefaults()
+        if let minutes = userDefaults.object(forKey: MBSAttempts.minutes.rawValue) as? Int {
+            if minutes > 0 {
+                disableState()
+            }
+        } else {
+            enableViews()
+            // start with the standard value of attempts
+            registerQuantityCount()
+        }
+    }
+    
+    private func registerQuantityCount() {
+        let userDefaults = UserDefaults()
+        userDefaults.set(3, forKey: MBSAttempts.quantity.rawValue)
+        userDefaults.synchronize()
+    }
+    
+    private func runTimer() {
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier!)
+        })
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func updateTimer() {
+        count -= 1
+        // update label top view
+        runCountDown()
+    }
+    
+    private func resetCount() {
+        count = 120
+    }
+    
+    private func enableState() {
+        enableViews()
+        alpha = 1.0
+    }
+    
+    private func runCountDown() {
+        if(count > 0) {
+            let minutes = String(count / 60)
+            let seconds = String(count % 60)
+            let secondsFormatted = Int(seconds)! < 10 ? "0\(seconds)" : seconds
+            topView.lblPasswordRequest.text = "Try again in 0\(minutes + ":" + secondsFormatted)"
+        } else {
+            topView.updateLabel()
+            registerQuantityCount()
+            cleanMinutesCount()
+            enableState()
+            stopTimer()
+            resetCount()
+        }
+    }
+    
+    private func stopTimer() {
+        timer.invalidate()
+        timer = nil
     }
 }
 
