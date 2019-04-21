@@ -181,6 +181,15 @@ class MBSTopPasswordViewTests: XCTestCase {
         XCTAssertEqual(MBSPasswordView.isBiometricsActivate, true)
     }
     
+    func testUpdateLabel() {
+        mbsPasswordView.topView.updateLabel()
+        if mbsPasswordView.topView.changeExistingPassword {
+            XCTAssertEqual("Inform the current password", mbsPasswordView.topView.lblPasswordRequest.text)
+        } else {
+            XCTAssertEqual("Inform your password", mbsPasswordView.topView.lblPasswordRequest.text)
+        }
+    }
+    
     func testBiometricsActivateFalse() {
         MBSPasswordView.isBiometricsActivate = false
         

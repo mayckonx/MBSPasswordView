@@ -6,6 +6,7 @@
 //  Copyright © 2019 Mayckon Barbosa da Silva. All rights reserved.
 //
 import XCTest
+import LocalAuthentication
 @testable import MBSPasswordView
 
 class MBSPasswordViewTests: XCTestCase {
@@ -55,6 +56,37 @@ class MBSPasswordViewTests: XCTestCase {
         XCTAssertEqual(self.mbsPasswordView.isLimitAttemptsOut(), true)
     }
     
+    func testChangeExistingPassword() {
+        mbsPasswordView.changeExistingPassword()
+        XCTAssertEqual(self.mbsPasswordView.topView.changeExistingPassword, true)
+    }
+    
+    func testDeviceBiometricsKind() {
+       let kind = MBSPasswordView.deviceBiometricsKind()
+       let biometricsOfDevice = LAContext().biometryType
+        switch biometricsOfDevice {
+        case .faceID:
+            XCTAssertEqual(kind, .faceID)
+        case .touchID:
+            XCTAssertEqual(kind, .touchID)
+        case .none:
+            XCTAssertEqual(kind, .none)
+        }
+    }
+    
+    func testShakeView() {
+        let kind = MBSPasswordView.deviceBiometricsKind()
+        let biometricsOfDevice = LAContext().biometryType
+        switch biometricsOfDevice {
+        case .faceID:
+            XCTAssertEqual(kind, .faceID)
+        case .touchID:
+            XCTAssertEqual(kind, .touchID)
+        case .none:
+            XCTAssertEqual(kind, .none)
+        }
+    }
+    
     // MARK: - Test properties initialization and assignments
     func testCommonInit() {
         // delegate is set
@@ -68,6 +100,8 @@ class MBSPasswordViewTests: XCTestCase {
         XCTAssertEqual(mbsPasswordView.topView.isUserInteractionEnabled, false)
         XCTAssertEqual(mbsPasswordView.bodyView.isUserInteractionEnabled, false)
     }
+    
+    
     
     func testStart() {
         mbsPasswordView.start(enableBiometrics: false)
