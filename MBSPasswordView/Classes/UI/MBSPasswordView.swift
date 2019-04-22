@@ -135,7 +135,7 @@ extension MBSPasswordView: MBSTopPasswordDelegate, Shakable {
    public func password(_ result: [String]) {
         registerPassword(result)
         disableViews()
-        callBiometricsIfEnabled(result)
+        authenticateUser(result)
     }
     public func invalidMatch() {
         shakeView()
@@ -287,6 +287,21 @@ extension MBSPasswordView {
 // MARK: - Request Authentication
 extension MBSPasswordView: MBSAuthenticatable {
     private func callBiometricsIfEnabled(_ password: [String]) {
+        if enableBiometricsAuthentication {
+            self.authenticateByBiometrics(title: titleToRequestAuthentication) { result in
+                switch result {
+                case .success:
+                    self.delegate?.passwordFromBiometrics(MBSPasswordResult.success(password))
+                case .error(let error):
+                    // we won't request on the next try... User should try by password
+                    self.enableBiometricsAuthentication = false
+                    self.delegate?.passwordFromBiometrics(MBSPasswordResult.error(error))
+                }
+            }
+        }
+    }
+    
+    private func authenticateUser(_ password: [String]) {
         if enableBiometricsAuthentication {
             self.authenticateByBiometrics(title: titleToRequestAuthentication) { result in
                 switch result {

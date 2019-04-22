@@ -10,10 +10,7 @@ import Foundation
 import LocalAuthentication
 
 public enum MBSAuthenticationIDError: Error {
-    case notRegistered
-    case canceled
     case notSupported
-    case invalidID
 }
 
 public protocol MBSAuthenticatable {

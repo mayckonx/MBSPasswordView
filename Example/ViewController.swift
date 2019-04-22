@@ -21,8 +21,7 @@ class ViewController: UIViewController {
         
         passwordView?.delegate = self
         passwordView?.titleToRequestAuthentication = "Please, identify your self!"
-        passwordView?.start(enableBiometrics: false)
-        passwordView?.changeExistingPassword()
+        passwordView?.start(enableBiometrics: true)
 
         // when user wants to change the registered password... you just use this method and mbspasswordview will take care of it and gives you the new password on the password delegate method.
         //passwordView?.changeExistingPassword()
@@ -58,19 +57,6 @@ extension ViewController: MBSPasswordDelegate {
             print("Authenticated by password and biometrics. Password:\(password)")
         case .error(let error):
             print("Error to authenticate by biometrics...")
-            if let error = (error as? MBSAuthenticationIDError) {
-                switch error {
-                case .notRegistered:
-                    print("notRegistered")
-                case .invalidID:
-                    print("invalidID")
-                case .notSupported:
-                    print("device or so notSupported")
-                case .canceled:
-                    print("canceled")
-                    
-                }
-            }
         }
     }
 }
