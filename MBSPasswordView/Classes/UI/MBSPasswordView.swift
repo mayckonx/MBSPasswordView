@@ -275,7 +275,7 @@ extension MBSPasswordView {
         return userDefaults.value(forKey: MBSUserAuthetication.done.rawValue) as? [String]
     }
     
-    public func cleanPasswordUserDefaults() {
+    static public func cleanPasswordUserDefaults() {
         let userDefaults = UserDefaults()
         if let _ = userDefaults.value(forKey: MBSUserAuthetication.done.rawValue) as? [String] {
             userDefaults.removeObject(forKey: MBSUserAuthetication.done.rawValue)
