@@ -20,7 +20,7 @@ class MBSPasswordViewTests: XCTestCase {
     
     override func setUp() {
         self.mbsPasswordView = loadView()
-        self.mbsPasswordView.cleanPasswordUserDefaults()
+        MBSPasswordView.cleanPasswordUserDefaults()
         
         let userDefaults = UserDefaults()
         userDefaults.removeObject(forKey: "\(MBSAttempts.quantity)")

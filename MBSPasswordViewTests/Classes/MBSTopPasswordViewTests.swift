@@ -23,7 +23,7 @@ class MBSTopPasswordViewTests: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        mbsPasswordView.cleanPasswordUserDefaults()
+        MBSPasswordView.cleanPasswordUserDefaults()
         mbsPasswordView.topView.delegate = nil
     }
     
@@ -227,7 +227,7 @@ class MBSTopPasswordViewTests: XCTestCase {
         
         mockDelegate.didCallPassword = { password in
             XCTAssertNotNil(UserDefaults.value(forKey: MBSUserAuthetication.done.rawValue))
-            self.mbsPasswordView.cleanPasswordUserDefaults()
+            MBSPasswordView.cleanPasswordUserDefaults()
             XCTAssertNil(UserDefaults.value(forKey: MBSUserAuthetication.done.rawValue))
             delayExpectation.fulfill()
         }
