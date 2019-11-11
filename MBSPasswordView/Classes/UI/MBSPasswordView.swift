@@ -236,7 +236,8 @@ extension MBSPasswordView {
             let minutes = String(count / 60)
             let seconds = String(count % 60)
             let secondsFormatted = Int(seconds)! < 10 ? "0\(seconds)" : seconds
-            topView.lblPasswordRequest.text = "Try again in 0\(minutes + ":" + secondsFormatted)"
+            let tryAgainIn = topView.tryAgainIn
+            topView.lblPasswordRequest.text = "\(tryAgainIn) 0\(minutes + ":" + secondsFormatted)"
         } else {
             topView.updateLabel()
             registerQuantityCount()

@@ -25,6 +25,13 @@ public protocol MBSTopPasswordViewType {
     var labelColor: UIColor { get set }
     /// font of label alert
     var font: UIFont? { get set }
+    
+    /// labels
+    var currentPassword: String { get set }  //"Inform the current password"
+    var requestPassword: String { get set }  //"Inform your password"
+    var newPassword: String { get set } // "Enter new password"
+    var confirmNewPassword: String { get set } //"Confirm new password"
+    var tryAgainIn: String { get set }
 }
 
 public protocol MBSTopPasswordDelegate: class {
@@ -34,6 +41,12 @@ public protocol MBSTopPasswordDelegate: class {
 
 // Implementation
 public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
+    
+    public var currentPassword = "Inform the current password"
+    public var requestPassword = "Inform your password"
+    public var newPassword = "Enter new password"
+    public var confirmNewPassword = "Confirm new password"
+    public var tryAgainIn: String = "Try again in"
     
     enum ViewState {
         case login
@@ -124,7 +137,7 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
             
         case .changePasswordRequest:
             changePasswordMode()
-        
+            
         case .changePasswordNewPassword:
             isConfirmationMode = false
             changeExistingPassword = false
@@ -175,7 +188,7 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         if isConfirmationMode {
             confirmationValues.append(value)
             addDotView()
-
+            
             if confirmationValues.count == passwordLenght {
                 changeStateTo(newState: .validatePassword)
             }
@@ -329,15 +342,15 @@ extension MBSTopPasswordView {
 extension MBSTopPasswordView {
     private func confirmationMode() {
         isConfirmationMode = true
-        lblPasswordRequest.text = "Confirm new password"
+        lblPasswordRequest.text = confirmNewPassword
     }
     private func passwordMode() {
         isConfirmationMode = false
-        lblPasswordRequest.text = "Enter new password"
+        lblPasswordRequest.text = newPassword
     }
     private func registeredPassswordMode() {
         isConfirmationMode = true
-        lblPasswordRequest.text = "Inform your password"
+        lblPasswordRequest.text = requestPassword
     }
     func updateLabel() {
         if changeExistingPassword {
@@ -348,6 +361,6 @@ extension MBSTopPasswordView {
     }
     private func changePasswordMode() {
         isConfirmationMode = true
-        lblPasswordRequest.text = "Inform the current password"
+        lblPasswordRequest.text = currentPassword
     }
 }
