@@ -44,7 +44,9 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
     
     public var currentPassword = "Inform the current password"
     public var requestPassword = "Inform your password"
-    public var newPassword = "Enter new password"
+    public var newPassword: String = "Enter new password" {
+        didSet { lblPasswordRequest.text = self.newPassword }
+    }
     public var confirmNewPassword = "Confirm new password"
     public var tryAgainIn: String = "Try again in"
     
