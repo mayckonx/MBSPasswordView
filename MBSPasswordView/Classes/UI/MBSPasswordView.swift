@@ -26,6 +26,7 @@ public protocol MBSPasswordViewType {
 }
 
 public protocol MBSPasswordDelegate: class {
+    func wrongPassword()
     func password(_ result: [String])
     func passwordFromBiometrics(_ result: MBSPasswordResult<[String]>)
 }
@@ -138,6 +139,7 @@ extension MBSPasswordView: MBSTopPasswordDelegate, Shakable {
         authenticateUser(result)
     }
     public func invalidMatch() {
+        delegate?.wrongPassword()
         shakeView()
         disableStateIfNeeded()
     }
@@ -294,6 +296,7 @@ extension MBSPasswordView: MBSAuthenticatable {
                 case .success:
                     self.delegate?.passwordFromBiometrics(MBSPasswordResult.success(password))
                 case .error(let error):
+                    self.emitWrongBiometricsIfNeeded(error)
                     // we won't request on the next try... User should try by password
                     self.enableBiometricsAuthentication = false
                     self.delegate?.passwordFromBiometrics(MBSPasswordResult.error(error))
@@ -309,6 +312,7 @@ extension MBSPasswordView: MBSAuthenticatable {
                 case .success:
                     self.delegate?.passwordFromBiometrics(MBSPasswordResult.success(password))
                 case .error(let error):
+                    self.emitWrongBiometricsIfNeeded(error)
                     // we won't request on the next try... User should try by password
                     self.enableBiometricsAuthentication = false
                     self.delegate?.passwordFromBiometrics(MBSPasswordResult.error(error))
@@ -316,6 +320,16 @@ extension MBSPasswordView: MBSAuthenticatable {
             }
         } else {
             delegate?.password(password)
+        }
+    }
+    
+    private func emitWrongBiometricsIfNeeded(_ error: Error?) {
+        if let error = error as? LAError {
+            switch error.code {
+            case .authenticationFailed, .biometryLockout:
+                delegate?.wrongPassword()
+            default: break
+            }
         }
     }
 }

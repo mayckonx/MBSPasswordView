@@ -32,7 +32,7 @@ extension MBSAuthenticatable where Self: UIView {
                     if success {
                         result(.success(true))
                     } else {
-                        result(.error(error))
+                        result(.error(authenticationError))
                     }
                 }
             }

@@ -59,5 +59,8 @@ extension ViewController: MBSPasswordDelegate {
             print("Error to authenticate by biometrics...")
         }
     }
+    func wrongPassword() {
+        print("Wrong paswword or biometrics...")
+    }
 }
 
