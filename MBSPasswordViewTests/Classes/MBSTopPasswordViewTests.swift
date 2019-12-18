@@ -146,7 +146,7 @@ class MBSTopPasswordViewTests: XCTestCase {
         
         insertInvalidMatchPasswords()
         
-        mockDelegate.didCallInvalidMatch = {
+        mockDelegate.didCallInvalidMatch = { result in
             delayExpectation.fulfill()
         }
         waitForExpectations(timeout: 1.1)
@@ -209,7 +209,7 @@ class MBSTopPasswordViewTests: XCTestCase {
             // mustn't be called
             XCTFail("Mustn't be called")
         }
-        mockDelegate.didCallInvalidMatch = {
+        mockDelegate.didCallInvalidMatch = { result in
             XCTFail("Mustn't be called")
         }
         waitForExpectations(timeout: 1.1)
@@ -291,18 +291,18 @@ extension MBSTopPasswordViewTests {
 
 // MARK: - MOCK
 private final class MockTopPasswordDelegate: MBSTopPasswordDelegate {
+    func invalidMatch(_ result: InvalidPasswordResult) {
+        didCallInvalidMatch(result)
+    }
     
-    var didCallInvalidMatch: (() -> Void)
+    var didCallInvalidMatch: ((InvalidPasswordResult) -> Void)
     var didCallPassword: (([String]) -> Void)
     
     init() {
-        didCallInvalidMatch = { }
+        didCallInvalidMatch = { _ in }
         didCallPassword = { _ in }
     }
     
-    func invalidMatch() {
-        didCallInvalidMatch()
-    }
     func password(_ result: [String]) {
         didCallPassword(result)
     }
