@@ -9,6 +9,6 @@ before_install:
   - gem install danger-swiftlint
 
 script:
-  - xcodebuild test -project MBSPasswordView.xcodeproj -scheme MBSPasswordView -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
+  - xcodebuild test -project MBSPasswordView.xcodeproj -scheme MBSPasswordView -destination 'platform=iOS Simulator,name=iPhone 11,OS=12.0'
 
 after_success: slather
