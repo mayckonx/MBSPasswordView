@@ -14,6 +14,12 @@ public enum PasswordAnimation {
     //case growUp
 }
 
+public enum InvalidPasswordResult {
+    case biometrics
+    case loginPassword(_ wrongPassword: [String])
+    case registerPassword(_ wrongPassword: [String])
+}
+
 public protocol MBSTopPasswordViewType {
     /// kind of animation
     var passwordAnimation: PasswordAnimation { get set }
@@ -35,7 +41,7 @@ public protocol MBSTopPasswordViewType {
 }
 
 public protocol MBSTopPasswordDelegate: class {
-    func invalidMatch()
+    func invalidMatch(_ result: InvalidPasswordResult)
     func password(_ result: [String])
 }
 
@@ -153,14 +159,15 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
             handleConfirmation()
             
         case .passwordInvalid:
+            let tmpConfirmationValues = confirmationValues
             if isLogin {
                 let newState = changeExistingPassword ? ViewState.changePasswordRequest : ViewState.login
                 changeToNewStateWithDelay(newState: newState) {
-                    self.invalidPassword()
+                    self.invalidPassword(.loginPassword(tmpConfirmationValues))
                 }
             } else {
                 changeToNewStateWithDelay(newState: .newPassword) {
-                    self.invalidPassword()
+                    self.invalidPassword(.registerPassword(tmpConfirmationValues))
                 }
             }
             
@@ -169,10 +176,10 @@ public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
         }
     }
     
-    private func invalidPassword() {
+    private func invalidPassword(_ result: InvalidPasswordResult) {
         self.removeAllPasswordViews()
         self.removePasswordArrayData()
-        self.notifyPasswordInvalid()
+        self.notifyPasswordInvalid(result)
     }
     
     private func changeToNewStateWithDelay(newState: ViewState, completion: (() -> Void)?) {
@@ -268,10 +275,10 @@ extension MBSTopPasswordView {
         showAnimatedPassword(passwordView)
     }
     
-    private func notifyPasswordInvalid() {
+    private func notifyPasswordInvalid(_ result: InvalidPasswordResult) {
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         showErrorAnimation() {
-            self.delegate?.invalidMatch()
+            self.delegate?.invalidMatch(result)
         }
     }
 }

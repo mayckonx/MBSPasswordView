@@ -26,7 +26,7 @@ public protocol MBSPasswordViewType {
 }
 
 public protocol MBSPasswordDelegate: class {
-    func wrongPassword()
+    func wrongPassword(_ result: InvalidPasswordResult)
     func password(_ result: [String])
     func passwordFromBiometrics(_ result: MBSPasswordResult<[String]>)
 }
@@ -133,16 +133,18 @@ public class MBSPasswordView: UIView, MBSPasswordViewType {
 
 // MARK: - Protocols to support MBSTopPasswordView
 extension MBSPasswordView: MBSTopPasswordDelegate, Shakable {
+    public func invalidMatch(_ result: InvalidPasswordResult) {
+        delegate?.wrongPassword(result)
+        shakeView()
+        disableStateIfNeeded()
+    }
+    
    public func password(_ result: [String]) {
         registerPassword(result)
         disableViews()
         authenticateUser(result)
     }
-    public func invalidMatch() {
-        delegate?.wrongPassword()
-        shakeView()
-        disableStateIfNeeded()
-    }
+    
     private func shakeView() {
         if isShakable {
             shake()
@@ -327,7 +329,7 @@ extension MBSPasswordView: MBSAuthenticatable {
         if let error = error as? LAError {
             switch error.code {
             case .authenticationFailed, .biometryLockout:
-                delegate?.wrongPassword()
+                delegate?.wrongPassword(.biometrics)
             default: break
             }
         }
