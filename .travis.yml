@@ -3,6 +3,7 @@ language: swift
 
 xcode_project: MBSPasswordView.xcodeproj
 before_install:
+  - brew update
   - gem install slather
   - gem install danger --no-ri --no-rdoc
   - gem install danger-swiftlint --no-ri --no-rdoc
