@@ -48,12 +48,18 @@ public protocol MBSTopPasswordDelegate: class {
 // Implementation
 public class MBSTopPasswordView : UIView, MBSTopPasswordViewType {
     
-    public var currentPassword = "Inform the current password"
-    public var requestPassword = "Inform your password"
+    public var currentPassword = "Inform the current password" {
+        didSet { lblPasswordRequest.text = self.currentPassword }
+    }
+    public var requestPassword = "Inform your password" {
+        didSet { lblPasswordRequest.text = self.requestPassword }
+    }
     public var newPassword: String = "Enter new password" {
         didSet { lblPasswordRequest.text = self.newPassword }
     }
-    public var confirmNewPassword = "Confirm new password"
+    public var confirmNewPassword = "Confirm new password" {
+        didSet { lblPasswordRequest.text = self.confirmNewPassword }
+    }
     public var tryAgainIn: String = "Try again in"
     
     enum ViewState {
